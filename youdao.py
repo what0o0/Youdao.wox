@@ -7,8 +7,6 @@ import webbrowser
 import requests
 from wox import Wox
 
-import chardet
-
 QUERY_API = 'http://fanyi.youdao.com/openapi.do?keyfrom=WoxYoudaoPlugin&key=315576122&type=data&doctype=json&version=1.1&q='
 EMPTY_RESULT = {
   'Title': 'Start to translate between Chinese and English',
