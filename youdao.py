@@ -8,7 +8,7 @@ import webbrowser
 
 import requests
 from wox import Wox
-from urllib import urlencode
+from urllib.parse import urlencode
 
 APP_KEY = ''
 APP_SECRET = ''
@@ -27,8 +27,9 @@ class Main(Wox):
       result.append(EMPTY_RESULT)
     else:
       salt = str(random.randint(0, 10000))
-      q = param.strip().encode('utf8')
-      sign = hashlib.md5(APP_KEY + q + salt + APP_SECRET).hexdigest().upper()
+      q = param.strip()
+      k = (APP_KEY + q + salt + APP_SECRET).encode('utf-8')
+      sign = hashlib.md5(k).hexdigest().upper()
       response = requests.get(QUERY_API % (q, APP_KEY, salt, sign), proxies = self.__get_proxies()).json()
       if response and response['errorCode'] == '0':
         if 'translation' in response and response['translation'] != []:
